@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:8000/api/',
+  baseURL: 'https://homeplant-backend-cvdnb5a8cff5dhdp.polandcentral-01.azurewebsites.net/api/',
 });
 
 // Додаємо токен автоматично до кожного запиту
