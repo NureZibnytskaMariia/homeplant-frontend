@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../pages/api';
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({ name: '', email: '', password: '', confirmPassword: '' });
@@ -14,7 +14,7 @@ const RegisterPage = () => {
 
     try {
       // Відправка на бекенд (Django)
-      const response = await axios.post('http://localhost:8000/api/register/', {
+      const response = await api.post('auth/register/', {
         username: formData.name,
         email: formData.email,
         password: formData.password
