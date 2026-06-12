@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import api from '../pages/api';
+import api from '../api';
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({ name: '', email: '', password: '', confirmPassword: '' });
