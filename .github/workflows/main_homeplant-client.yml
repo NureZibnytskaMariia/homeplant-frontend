@@ -26,6 +26,7 @@ jobs:
       - name: Clean install and build production code
         run: |
           npm install --no-audit --no-fund
+          rm -rf dist
           npm run build
 
       - name: Upload artifact for deployment job
