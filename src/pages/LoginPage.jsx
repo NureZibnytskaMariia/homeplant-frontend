@@ -16,6 +16,9 @@ const LoginPage = () => {
                 password: formData.password
             });
 
+            const token = res.data.access;
+            api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
             login(res.data.user, res.data.access);
 
             if (res.data.user.is_admin) {
