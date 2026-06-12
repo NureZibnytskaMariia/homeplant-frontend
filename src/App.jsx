@@ -1,0 +1,54 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import ProtectedRoute from './components/ProtectedRoute';
+import LandingPage from './pages/LandingPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import AdminDashboard from './pages/AdminDashboard';
+import UserList from './pages/UserList'; 
+import AdminLayout from './components/AdminLayout';
+import PlantTypes from './pages/PlantTypes';
+import UserLayout from './components/UserLayout';
+import UserDashboard from './pages/UserDashboard';
+import MyPlants from './pages/MyPlants';
+import PlantCatalog from './pages/PlantCatalog';
+import CareCalendar from './pages/CareCalendar';
+
+function App() {
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+
+          <Route element={<UserLayout />}>
+            <Route path="/dashboard" element={<ProtectedRoute><UserDashboard /></ProtectedRoute>} />
+            <Route path="/my-plants" element={<ProtectedRoute><MyPlants /></ProtectedRoute>} />
+            <Route path="/catalog" element={<ProtectedRoute><PlantCatalog /></ProtectedRoute>} />
+            <Route path="calendar" element={<CareCalendar />} />
+          </Route>
+
+          <Route path="/admin" element={
+            <ProtectedRoute adminOnly={true}>
+              <AdminLayout />
+            </ProtectedRoute>
+          }>
+            <Route index element={<AdminDashboard />} />
+            <Route path="users" element={<UserList />} />
+            <Route path="plant-types" element={<PlantTypes />} />
+          </Route>
+
+          <Route path="*" element={
+            <div style={{ textAlign: 'center', marginTop: '50px' }}>
+              <h1>404 - Сторінку не знайдено</h1>
+            </div>
+          } />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
+  );
+}
+
+export default App;
